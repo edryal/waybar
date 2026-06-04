@@ -1,0 +1,264 @@
+[
+    {
+        "layer": "top",
+        "position": "top",
+        "name": "main",
+        "margin-bottom": -18,
+        "margin-left": 20,
+        "margin-right": 20,
+        "modules-left": [
+            "hyprland/workspaces",
+            "custom/spacer2",
+            "hyprland/submap",
+            "hyprland/window"
+        ],
+        "modules-right": [
+            "temperature",
+            "cpu",
+            "memory#ram",
+            "custom/spacer1",
+            // "group/storage",
+            // "disk",
+            // "network#info",
+            // "battery",
+            // "backlight",
+            // "custom/spacer1",
+            "pulseaudio#input",
+            "pulseaudio#output",
+            "custom/dsbattery",
+            "custom/spacer1",
+            "hyprland/language",
+            // "custom/spacer1",
+            "clock",
+            "custom/spacer1",
+            "tray"
+        ],
+        // Modules
+        "disk": {
+            "interval": 16,
+            "format": " {percentage_used}%",
+            "tooltip": "{}",
+            "tooltip-format": "Free {free}",
+            "states": {
+                "warning": 85,
+                "critical": 95
+            }
+        },
+        "group/tray": {
+            "orientation": "horizontal",
+            "drawer": {
+                "transition-duration": "500",
+                "transition-left-to-right": "true",
+                "children-class": "drawer-child"
+                //"click-to-reveal": "false"
+            },
+            "modules": [
+                "custom/trayicon",
+                "tray"
+            ]
+        },
+        "clock": {
+            "interval": 1,
+            "format": " {:%H:%M:%S    %d.%m}",
+            "tooltip-format": "{:%d.%m.%Y   Week %W}\n\n<tt><small>{calendar}</small></tt>",
+            "calendar": {
+                "mode": "month",
+                "mode-mon-col": 3,
+                "weeks-pos": "right",
+                "on-scroll": 1,
+                "format": {
+                    "months": "<span color='#cba6f7'><b>{}</b></span>",
+                    "days": "<span color='#cdd6f4'><b>{}</b></span>",
+                    "weeks": "<span color='#94e2d5'> W{}</span>",
+                    "weekdays": "<span color='#f9e2af'><b>{}</b></span>",
+                    "today": "<span color='#f5e0dc'><b><u>{}</u></b></span>"
+                }
+            }
+        },
+        "cpu": {
+            "interval": 4,
+            "format": "  {usage}%",
+            "states": {
+                "warning": 80,
+                "critical": 95
+            }
+        },
+        "hyprland/language": {
+            "format": "  {}",
+            "min-length": 7,
+            "on-click": "hyprctl switchxkblayout current next",
+            "tooltip": false,
+            "class": "language",
+            "format-ro": "Romanian",
+            "format-en": "English"
+        },
+        "memory#ram": {
+            "interval": 4,
+            "format": "  {percentage}%",
+            "states": {
+                "warning": 80,
+                "critical": 95
+            },
+            "tooltip": "{}",
+            "tooltip-format": "{used}/{total} GiB"
+        },
+        "network#info": {
+            "interval": 2,
+            "format": "󱘖  Offline",
+            "format-wifi": "{icon} {bandwidthDownBits}",
+            "format-ethernet": "󰈀 {bandwidthDownBits}",
+            "min-length": 11,
+            "tooltip": "{}",
+            "tooltip-format-wifi": "{ifname}\n{essid}\n{signalStrength}% \n{frequency} GHz\n󰇚 {bandwidthDownBits}\n󰕒 {bandwidthUpBits}",
+            "tooltip-format-ethernet": "{ifname}\n󰇚 {bandwidthDownBits} \n󰕒 {bandwidthUpBits}",
+            "format-icons": [
+                "󰤫",
+                "󰤟",
+                "󰤢",
+                "󰤥",
+                "󰤨"
+            ],
+            "states": {
+                "normal": 25
+            }
+        },
+        "network#up": {
+            "interval": 4,
+            "format": " ",
+            "format-wifi": "󰕒 {bandwidthUpBits}",
+            "format-ethernet": "󰕒 {bandwidthUpBits}",
+            "format-disconnected": " ",
+            "min-length": 11
+        },
+        "network#down": {
+            "interval": 4,
+            "format": "󰇚 {bandwidthDownBits}",
+            "format-wifi": "󰇚 {bandwidthDownBits}",
+            "format-ethernet": "󰇚 {bandwidthDownBits}",
+            "min-length": 11
+        },
+        "hyprland/submap": {
+            "always-on": true,
+            "default-submap": "",
+            "format": "{}",
+            "format-RESIZE": "{}lol",
+            "tooltip": false
+        },
+        "hyprland/window": {
+            "format": "{title}",
+            "max-length": 48,
+            "tooltip": false,
+            "icon": true,
+            "icon-size": 12,
+            "separate-outputs": true,
+            // fix bug where weird character in channel names strech waybar
+            "rewrite": {
+                "(.*) Highland Tavern - Discord": "Highland Tavern - Discord"
+            }
+        },
+        "hyprland/workspaces": {
+            "format": "{icon}",
+            "show-special": true,
+            "special-visible-only": false,
+            "format-icons": {
+                "magic": " ",
+                "10": "󰊴 "
+            }
+        },
+        "pulseaudio#output": {
+            "format": "{icon}  {volume}%",
+            "format-bluetooth": "{icon}  {volume}%",
+            "format-source-muted": "{volume}",
+            "format-icons": {
+                "headphone": "",
+                "hands-free": "",
+                "headset": "",
+                "phone": "",
+                "portable": "",
+                "car": "",
+                "default": [
+                    "",
+                    ""
+                ]
+            },
+            "on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+            "on-click": "pavucontrol",
+            "tooltip": true,
+            "scroll-step": 5
+        },
+        "pulseaudio#input": {
+            "format": "{icon} {format_source}%",
+            "format-source": "{volume}",
+            "format-source-muted": "{volume}",
+            "on-scroll-up": "sh -c 'vol=$(pactl get-source-volume @DEFAULT_SOURCE@ | grep -oP \"\\d+(?=%)\" | head -1); if [ \"$vol\" -lt 100 ]; then pactl set-source-volume @DEFAULT_SOURCE@ +5%; fi'",
+            "on-scroll-down": "pactl set-source-volume @DEFAULT_SOURCE@ -5%",
+            "max-volume": "100",
+            "on-click-right": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
+            "on-click": "pavucontrol",
+            "tooltip-format": "{source_desc}"
+        },
+        "temperature": {
+            "critical-threshold": 90,
+            "interval": 4,
+            "format": "{icon} {temperatureC}°",
+            "format-icons": [
+                "",
+                "",
+                "",
+                "",
+                ""
+            ],
+            "tooltip": false
+        },
+        "battery": {
+            "bat": "BAT0",
+            "states": {
+                // "good": 95,
+                "warning": 30,
+                "critical": 15
+            },
+            "format": "{capacity}% {icon}",
+            "format-charging": "{capacity}% 󰂄",
+            "format-plugged": "{capacity}% ",
+            "format-alt": "{time} {icon}",
+            // "format-good": "",
+            "format-full": "100% ",
+            "format-icons": [
+                "",
+                "",
+                "",
+                "",
+                ""
+            ]
+        },
+        "backlight": {
+            "format": "{percent}% {icon}",
+            "format-icons": [
+                "",
+                ""
+            ]
+        },
+        "tray": {
+            "icon-size": 18,
+            "spacing": 8
+        },
+        "custom/dsbattery": {
+            "format": "{}",
+            "interval": 3,
+            "escape": true,
+            "exec": "dsbattery"
+        },
+        "custom/spacer1": {
+            "format": " \\\\ ",
+            "tooltip": false
+        },
+        "custom/spacer2": {
+            "format": " ",
+            "tooltip": false
+        },
+        "custom/spacer3": {
+            "format": " // ",
+            "tooltip": false
+        }
+    }
+]
