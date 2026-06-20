@@ -1,18 +1,20 @@
-/* Define colors */
-@define-color background rgba(21, 21, 32, 0.75);
-/* @define-color background  #151520; */
-@define-color warning #f38ba8;
-@define-color caution #45475a;
-@define-color performance #f5c2e7;
-@define-color audio #cba6f7;
-@define-color misc #94e2d5;
-@define-color date #a6e3a1;
-@define-color work #b4befe;
-@define-color window #b4befe;
-@define-color resize #eba0ac;
-@define-color process #89b4fa;
+@define-color bg rgba(12, 12, 16, 0.85);
+@define-color bg-solid #0a0a0c;
+@define-color text #e6e9f5;
+@define-color subtext #b4bbd4;
+@define-color muted #5c5f73;
 
-/* Reset all styles */
+@define-color red #f38ba8;
+@define-color red-bright #ff7d99;
+@define-color maroon #f0a8b4;
+@define-color peach #fab387;
+@define-color green #a6e3a1;
+@define-color mauve #cba6f7;
+
+@define-color perf @maroon;
+@define-color audio @text;
+@define-color mic @subtext;
+
 * {
     border: none;
     border-radius: 0;
@@ -21,267 +23,296 @@
     padding: 0;
     box-shadow: none;
     text-shadow: none;
+    font-family: "JetBrainsMono Nerd Font", "Symbols Nerd Font", "JetBrainsMono Nerd Font Mono", "Noto Sans";
+    font-size: 12pt;
+    font-weight: 700;
 }
 
-/* Main bar keyframes */
-/* Keyframes for main bar criticals */
-@keyframes blink-critical-text {
-    to {
-        color: @warning;
-    }
-}
-
-/* Keyframes for main bar modifiers */
-@keyframes blink-modifier-text {
-    to {
-        color: @caution;
-    }
-}
-
-/* Main bar defaults */
 #waybar.main {
     background: transparent;
-    font-family:
-        "JetBrainsMono Nerd Font",
-        "Symbols Nerd Font",
-        "Noto Sans",
-        "Noto Color Emoji";
-    font-size: 12pt;
-    font-weight: 500;
 }
 
-#waybar.main button {
-    font-family: "JetBrainsMono Nerd Font", "Symbols Nerd Font";
-    font-size: 12pt;
-    font-weight: 500;
-    transition: all 0.15s ease-in-out;
+@keyframes blink-critical {
+    to {
+        color: @red-bright;
+    }
 }
 
-/* Main bar modules */
-#waybar.main #custom-nvidia,
-#waybar.main #custom-weather,
-#waybar.main #custom-weather,
-#waybar.main #custom-battery,
-#waybar.main #keyboard-state,
-#waybar.main #network,
-#waybar.main #battery,
-#waybar.main #backlight,
-#waybar.main #clock,
-#waybar.main #cpu,
-#waybar.main #language,
-#waybar.main #memory.swap,
-#waybar.main #memory.ram,
+/* left group */
+#waybar.main #custom-launcher,
+#waybar.main #workspaces,
 #waybar.main #submap,
-#waybar.main #pulseaudio,
-#waybar.main #temperature,
-#waybar.main #custom-dsbattery,
-#waybar.main #tray,
-#waybar.main #window,
-#waybar.main #disk {
-    padding-left: 8pt;
-    padding-right: 8pt;
-    padding-bottom: 4px;
-    padding-top: 4px;
-    background: transparent;
+#waybar.main #window {
+    background: @bg;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border-top: 1px solid alpha(@red, 0.28);
+    border-bottom: 1px solid alpha(@red, 0.28);
 }
 
-#waybar.main #tray {
-    padding-right: 6pt;
-}
-
-#waybar.main #custom-weather {
-    padding-right: 3pt;
-}
-
-/* Module colors */
-#waybar.main #custom-nvidia,
-#waybar.main #cpu,
-#waybar.main #temperature,
-#waybar.main #memory.ram,
-#waybar.main #memory.swap,
-#waybar.main #disk,
-#waybar.main #network {
-    color: @performance;
-}
-
-#waybar.main #pulseaudio {
-    color: @audio;
-}
-
-#waybar.main #custom-battery,
-#waybar.main #dsbattery,
-#waybar.main #language,
-#waybar.main #backlight,
-#waybar.main #battery {
-    color: @misc;
-}
-
-#waybar.main #custom-weather,
-#waybar.main #clock {
-    color: @date;
+#waybar.main #custom-launcher {
+    color: @red;
+    font-size: 14pt;
+    padding-left: 14pt;
+    padding-right: 10pt;
+    border-left: 1px solid alpha(@red, 0.28);
+    /* left cap */
+    border-radius: 18px 0 0 18px;
 }
 
 #waybar.main #window {
-    color: @window;
-    margin-top: -0px;
+    color: @text;
+    font-weight: 600;
+    padding-left: 6pt;
+    padding-right: 16pt;
+    border-right: 1px solid alpha(@red, 0.28);
+    /* right cap */
+    border-radius: 0 18px 18px 0;
 }
 
-#waybar.main #network.info {
-    padding-right: 10px;
-    padding-left: 10px;
-    color: @caution;
+#waybar.main #submap {
+    color: @red-bright;
+    padding-left: 6pt;
+    padding-right: 6pt;
+}
+
+/* workspaces */
+#waybar.main #workspaces {
+    padding-left: 4pt;
+    padding-right: 4pt;
+}
+
+#waybar.main #workspaces button {
+    min-width: 22px;
+    padding: 0 4px;
+    margin: 0 3px;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    font-size: 11pt;
+    font-weight: 700;
+
+    color: @muted;
     background: transparent;
+    transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
 }
 
-#waybar.main #network.info.wifi.normal,
-#waybar.main #network.info.ethernet {
-    color: @performance;
-    padding-right: 15px;
+#waybar.main #workspaces button.visible {
+    color: @text;
 }
 
-#waybar.main #network.info.wifi {
-    color: @warning;
-    padding-right: 15px;
+#waybar.main #workspaces button.active {
+    color: @red-bright;
+    background: alpha(@red, 0.18);
+    border-color: alpha(@red, 0.55);
 }
 
-/* Submap */
-#waybar.main #submap.󰲏 {
-    color: @resize;
+#waybar.main #workspaces button:hover {
+    color: @text;
+    background: alpha(@red, 0.10);
+}
+
+#waybar.main #workspaces button.urgent {
+    color: @red-bright;
+    background: alpha(@red, 0.20);
+    animation-name: blink-critical;
+    animation-duration: 1s;
     animation-iteration-count: infinite;
     animation-direction: alternate;
-    animation-name: blink-modifier-text;
-    animation-duration: 1s;
-    animation-timing-function: steps(15);
 }
 
-#waybar.main #submap. {
-    color: @date;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-    animation-name: blink-modifier-text;
-    animation-duration: 1s;
-    animation-timing-function: steps(15);
+/* center group - spotify */
+#waybar.main #custom-spotify-icon,
+#waybar.main #custom-prev,
+#waybar.main #custom-play-pause,
+#waybar.main #custom-next,
+#waybar.main #mpris {
+    background: @bg;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border-top: 1px solid alpha(@red, 0.28);
+    border-bottom: 1px solid alpha(@red, 0.28);
 }
 
-/* Main bar criticals */
-#waybar.main #custom-nvidia.critical,
-#waybar.main #custom-battery.critical,
-#waybar.main #workspaces button.urgent,
-#waybar.main #workspaces button.special.urgent,
-#waybar.main #memory.swap.critical,
-#waybar.main #memory.ram.critical,
+#waybar.main #custom-spotify-icon {
+    color: @green;
+    font-size: 15pt;
+    padding-left: 14pt;
+    padding-right: 8pt;
+    border-left: 1px solid alpha(@red, 0.28);
+    border-radius: 18px 0 0 18px;
+}
+
+#waybar.main #custom-prev,
+#waybar.main #custom-next {
+    color: @subtext;
+    padding-left: 6pt;
+    padding-right: 6pt;
+    font-size: 15pt;
+}
+
+#waybar.main #custom-prev:hover,
+#waybar.main #custom-next:hover {
+    color: @red;
+}
+
+#waybar.main #custom-play-pause {
+    padding-left: 6pt;
+    padding-right: 8pt;
+    font-size: 16pt;
+}
+
+#waybar.main #custom-play-pause.playing {
+    color: @green;
+}
+
+#waybar.main #custom-play-pause.paused {
+    color: @subtext;
+}
+
+#waybar.main #custom-play-pause:hover {
+    color: @red;
+}
+
+#waybar.main #mpris {
+    color: @text;
+    font-weight: 600;
+    padding-left: 6pt;
+    padding-right: 16pt;
+    border-right: 1px solid alpha(@red, 0.28);
+    border-radius: 0 18px 18px 0;
+}
+
+#waybar.main #mpris.paused {
+    color: @subtext;
+}
+
+#waybar.main #mpris.stopped {
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    border: none;
+}
+
+/* when nothing is playing on startup mostly, media elements become hidden */
+#waybar.main #custom-spotify-icon.hidden,
+#waybar.main #custom-prev.hidden,
+#waybar.main #custom-play-pause.hidden,
+#waybar.main #custom-next.hidden {
+    padding: 0;
+    margin: 0;
+    border: none;
+    background: transparent;
+    min-width: 0;
+}
+
+/* RIGHT group */
+#waybar.main #perf,
+#waybar.main #audio,
+#waybar.main #clock,
+#waybar.main #tray {
+    background: @bg;
+    border: 1px solid alpha(@red, 0.28);
+    border-radius: 18px;
+    margin-left: 12px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 12pt;
+    padding-right: 12pt;
+}
+
+/* language bubble gets the same shape but mauve */
+#waybar.main #language {
+    background: @bg;
+    border: 1px solid alpha(@mauve, 0.40);
+    border-radius: 18px;
+    margin-left: 12px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 12pt;
+    padding-right: 12pt;
+}
+
+#waybar.main #temperature,
+#waybar.main #cpu,
+#waybar.main #memory.ram {
+    color: @perf;
+    padding-left: 7pt;
+    padding-right: 7pt;
+}
+
 #waybar.main #cpu.critical,
-#waybar.main #temperature.critical,
-#waybar.main #battery.critical.discharging {
-    color: @caution;
+#waybar.main #memory.ram.critical,
+#waybar.main #temperature.critical {
+    color: @red-bright;
+    animation-name: blink-critical;
+    animation-duration: 1s;
     animation-iteration-count: infinite;
     animation-direction: alternate;
-    animation-name: blink-critical-text;
-    animation-duration: 1s;
-    animation-timing-function: steps(15);
 }
 
-/* Main bar warnings */
+#waybar.main #cpu.warning,
+#waybar.main #memory.ram.warning {
+    color: @peach;
+}
+
+#waybar.main #pulseaudio.output {
+    color: @audio;
+    padding-left: 7pt;
+    padding-right: 7pt;
+}
+
+#waybar.main #pulseaudio.input {
+    color: @audio;
+    padding-left: 7pt;
+    padding-right: 7pt;
+}
+
 #waybar.main #pulseaudio.output.muted,
 #waybar.main #pulseaudio.input.source-muted {
-    color: @caution;
+    color: @muted;
 }
 
-#waybar.main #custom-battery.warning,
-#waybar.main #battery.warning.discharging {
-    color: @warning;
+#waybar.main #language {
+    color: @mauve;
 }
 
-/* Battery chargin */
-#waybar.main #custom-battery.charging {
-    color: @misc;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-    animation-name: blink-modifier-text;
-    animation-duration: 1s;
-    animation-timing-function: steps(15);
+#waybar.main #clock {
+    color: @red;
+    font-weight: 800;
 }
 
-/* Workspace */
-/* Default workspace settings */
-#waybar.main #workspaces button {
-    color: @caution;
-    background: transparent;
-    border: 1.5px solid transparent;
-    padding-left: 2pt;
-    padding-right: 2pt;
-    border-radius: 16px;
-    margin-bottom: 8px;
-    margin-top: 8px;
-    margin-left: 4px;
-    margin-right: 4px;
-    transition: all 0.25s ease;
-}
-
-/* Focused workspace */
-#waybar.main #workspaces button.visible {
-    color: @window;
-}
-
-/* Focused workspace & monitor */
-#waybar.main #workspaces button.active {
-    color: @performance;
-    border: 1.5px solid @caution;
-}
-
-/* Style when cursor is on the button */
-#waybar.main #workspaces button:hover {
-    color: @window;
-}
-
-/* Special workplace animation */
-#waybar.main #workspaces button.special.active {
-    border: 1.5px solid transparent;
-    color: @window;
-    transition: all 0s ease;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-    animation-name: blink-modifier-text;
-    animation-duration: 1s;
-    animation-timing-function: steps(15);
-}
-
-/* Custom slashes as spacers */
-#waybar.main #custom-spacer1,
-#waybar.main #custom-spacer2,
-#waybar.main #custom-spacer3 {
-    font-size: 12pt;
-    font-weight: bold;
-    color: @caution;
-    background: transparent;
-}
-
-/* Custom tray icon */
-#waybar.main #custom-trayicon {
-    font-size: 12pt;
-    font-weight: bold;
-    font-style: italic;
-    color: @process;
-    background: transparent;
-    padding-right: 6pt;
-    padding-left: 2pt;
-}
-
-/* Tooltip */
-tooltip {
-    background: @background;
-    border: 3px solid @caution;
-    border-radius: 8px;
-    font-weight: 500;
-    font-family: "JetBrainsMono Nerd Font", "Symbols Nerd Font";
+#waybar.main #tray {
+    padding-left: 10pt;
+    padding-right: 10pt;
 }
 
 #waybar.main #tray menu {
-    background: @background;
-    border: 3px solid @caution;
-    border-radius: 8px;
-    font-family: "JetBrainsMono Nerd Font", "Symbols Nerd Font";
-    font-size: 13pt;
+    background: @bg-solid;
+    border: 2px solid alpha(@red, 0.55);
+    border-radius: 12px;
+    padding: 10px 12px;
+    color: @text;
+}
+
+#waybar.main #tray menu menuitem {
+    padding: 4px 8px;
+    border-radius: 6px;
+}
+
+#waybar.main #tray menu menuitem:hover {
+    background: alpha(@red, 0.20);
+}
+
+/* Tooltip / Calendar */
+tooltip {
+    background: @bg-solid;
+    border: 2px solid alpha(@red, 0.55);
+    border-radius: 12px;
+    padding: 6px;
+}
+
+tooltip label {
+    color: @text;
     font-weight: 500;
-    padding: 11px 12px;
+    padding: 4px;
 }
