@@ -135,6 +135,8 @@
             "tooltip-format": "{used}/{total} GiB"
         },
         "temperature": {
+            "hwmon-path-abs": "/sys/devices/pci0000:00/0000:00:18.3/hwmon",
+            "input-filename": "temp1_input",
             "critical-threshold": 90,
             "interval": 4,
             "format": "{icon}  {temperatureC}°",
@@ -229,7 +231,161 @@
                 "18": "8",
                 "19": "9",
                 "20": "10"
+            },
+            "on-scroll-up": "hyprctl dispatch split-cycleworkspaces -1",
+            "on-scroll-down": "hyprctl dispatch split-cycleworkspaces +1",
+            "all-outputs": false
+        },
+        "tray": {
+            "icon-size": 16,
+            "spacing": 10
+        }
+    },
+    {
+        "layer": "top",
+        "position": "top",
+        "output": [
+            "HDMI-A-1"
+        ],
+        "name": "main",
+        "spacing": 0,
+        "margin-top": 8,
+        "margin-bottom": 0,
+        "margin-left": 12,
+        "margin-right": 12,
+        "modules-left": [
+            "custom/launcher",
+            "hyprland/workspaces",
+            "hyprland/submap",
+            "hyprland/window"
+        ],
+        "modules-right": [
+            "group/perf",
+            "hyprland/language",
+            "clock",
+            "tray"
+        ],
+        "group/perf": {
+            "orientation": "horizontal",
+            "modules": [
+                "temperature",
+                "cpu",
+                "memory#ram"
+            ]
+        },
+        "custom/launcher": {
+            "format": "",
+            "on-click": "pkill rofi || rofi -show drun",
+            "tooltip-format": "Apps"
+        },
+        "clock": {
+            "interval": 1,
+            "format": "  {:%H:%M}",
+            "format-alt": "  {:%a %d %b}",
+            "tooltip-format": "<span color='#f38ba8' font='13'><b>{:%A, %d %B %Y}</b></span>\n<tt><small>{calendar}</small></tt>",
+            "calendar": {
+                "mode": "month",
+                "mode-mon-col": 3,
+                "weeks-pos": "right",
+                "on-scroll": 1,
+                "format": {
+                    "months": "<span color='#f38ba8'><b>{}</b></span>",
+                    "days": "<span color='#cdd6f4'>{}</span>",
+                    "weeks": "<span color='#6c7086'><i>w{}</i></span>",
+                    "weekdays": "<span color='#eba0ac'><b>{}</b></span>",
+                    "today": "<span color='#11111b' background='#f38ba8'><b>{}</b></span>"
+                }
             }
+        },
+        "cpu": {
+            "interval": 4,
+            "format": "  {usage}%",
+            "states": {
+                "warning": 80,
+                "critical": 95
+            }
+        },
+        "temperature": {
+            "hwmon-path-abs": "/sys/devices/pci0000:00/0000:00:18.3/hwmon",
+            "input-filename": "temp1_input",
+            "critical-threshold": 90,
+            "interval": 4,
+            "format": "{icon}  {temperatureC}°",
+            "format-icons": [
+                "",
+                "",
+                "",
+                "",
+                ""
+            ],
+            "tooltip": false
+        },
+        "memory#ram": {
+            "interval": 4,
+            "format": "  {percentage}%",
+            "states": {
+                "warning": 80,
+                "critical": 95
+            },
+            "tooltip-format": "{used}/{total} GiB"
+        },
+        "hyprland/language": {
+            "format": "  {}",
+            "min-length": 7,
+            "on-click": "hyprctl switchxkblayout current next",
+            "tooltip": false,
+            "format-ro": "RO",
+            "format-en": "EN",
+            "format-jp": "JP"
+        },
+        "hyprland/submap": {
+            "always-on": true,
+            "default-submap": "",
+            "format": "{}",
+            "tooltip": false,
+            "min-length": 0
+        },
+        "hyprland/window": {
+            "format": "{title}",
+            "max-length": 42,
+            "tooltip": false,
+            "icon": true,
+            "icon-size": 14,
+            "separate-outputs": true,
+            "rewrite": {
+                "(.*) Highland Tavern - Discord": "Highland Tavern - Discord",
+                "": "Desktop"
+            }
+        },
+        "hyprland/workspaces": {
+            "format": "{icon}",
+            "show-special": true,
+            "special-visible-only": false,
+            "format-icons": {
+                "1": "1",
+                "2": "2",
+                "3": "3",
+                "4": "4",
+                "5": "5",
+                "6": "6",
+                "7": "7",
+                "8": "8",
+                "9": "9",
+                "10": "10",
+                "11": "1",
+                "12": "2",
+                "13": "3",
+                "14": "4",
+                "15": "5",
+                "16": "6",
+                "17": "7",
+                "18": "8",
+                "19": "9",
+                "20": "10"
+            },
+            "on-scroll-up": "hyprctl dispatch split-cycleworkspaces -1",
+            "on-scroll-down": "hyprctl dispatch split-cycleworkspaces +1",
+            "all-outputs": false
         },
         "tray": {
             "icon-size": 16,
