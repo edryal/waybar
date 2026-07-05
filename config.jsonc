@@ -43,7 +43,8 @@
             "orientation": "horizontal",
             "modules": [
                 "pulseaudio#input",
-                "pulseaudio#output"
+                "pulseaudio#output",
+                "custom/controller"
             ]
         },
         "custom/launcher": {
@@ -239,6 +240,14 @@
         "tray": {
             "icon-size": 16,
             "spacing": 10
+        },
+        "custom/controller": {
+            "exec": "$HOME/.config/waybar/scripts/controller-battery.sh",
+            "interval": 2,
+            "return-type": "json",
+            "format": "{text}",
+            "tooltip-format": "{tooltip}",
+            "on-click-middle": "$HOME/.config/waybar/scripts/controller-lightbar-toggle.sh toggle"
         }
     },
     {
