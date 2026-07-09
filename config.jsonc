@@ -57,7 +57,7 @@
             "return-type": "json",
             "interval": 1,
             "exec": "s=$(playerctl --player=spotify status 2>/dev/null); if [ \"$s\" = \"Playing\" ] || [ \"$s\" = \"Paused\" ]; then echo '{\"text\":\"\",\"class\":\"visible\"}'; else echo '{\"text\":\"\",\"class\":\"hidden\"}'; fi",
-            "on-click": "omarchy-launch-or-focus spotify 2>/dev/null || (hyprctl dispatch focuswindow class:Spotify || spotify)",
+            "on-click": "hyprctl dispatch 'hl.dsp.focus({ window = \"class:Spotify\" })'",
             "tooltip": false
         },
         "custom/prev": {
